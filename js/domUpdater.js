@@ -18,7 +18,7 @@ $(function() {
         gridClick($(this));
 
         //TODO: refactor this logic so that the turn determines the winner.
-        isWinner = checkIsWinner();
+        isWinner = isWinner();
 
         if (isWinner) {
             const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
@@ -42,23 +42,24 @@ $(function() {
         }
     }
 
-    function checkIsWinner() {
+    function isWinner() {
         // ticInstance.occupiedSquares;
 
-        //check columns
+        //check all three columns
         let winner = 'false';
         for (let i = 0; i < 3; i++) {
-            winner = findWinner(i);
+            winner = isSliceMatching(i);
             if (winner) { return winner }
         }
-        return winner; // winner is only false here. 
 
-        // check rows
-        // check diagonals
+        // check all three rows
+
+        // check all two diagonals
+        return winner; // winner is only false here. 
     }
 
     // if a the line has 3 of the same kind then return player name else 'none'
-    function findWinner(startingI) {
+    function isSliceMatching(startingI) {
         let initialValue = ticInstance.occupiedSquares[startingI];
         return initialValue !== 'empty' && colIsMatching(startingI, initialValue);
 
