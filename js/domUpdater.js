@@ -18,37 +18,37 @@ $(function() {
         gridClick($(this));
 
         //TODO: refactor this logic so that the turn determines the winner.
-        winner = checkWinner();
-        console.log('the winner is:', winner);
-        ticInstance.incrementTurn();
-
+        isWinner = checkIsWinner();
+        console.log('true if winner:', isWinner);
     })
 
     // imprints the pattern 
     function gridClick($thisElement) {
         const i = $thisElement.data('i');
-
         const symbol = ticInstance.currentTurn % 2 === 1 ? 'X' : 'O';
-        console.log('the current turn is', ticInstance.currentTurn);
-        // check if there is an existing value
+
         if (ticInstance.occupiedSquares[i] === "empty") {
             // console.log('you have clicked:', $thisElement.data('x'), $thisElement.data('y'));
             $thisElement.text(symbol);
             ticInstance.occupiedSquares[i] = symbol;
+            ticInstance.incrementTurn();
+
         } else {
-            console.log('that square is occupied');
+            console.log('that square is occupied, please choose again');
         }
     }
 
-    function checkWinner() {
+    //TODO: refactor this function so it only determines if someone has won.
+    function checkIsWinner() {
         // ticInstance.occupiedSquares;
 
         //check columns
         let winner = 'none';
         for (let i = 0; i < 3; i++) {
             winner = findWinner(i);
-            if (winner !== 'none') { return winner }
+            if (winner) { return winner }
         }
+        return winner; // winner is only false here. 
 
         // check rows
         // check diagonals
@@ -57,11 +57,7 @@ $(function() {
     // if a the line has 3 of the same kind then return player name else 'none'
     function findWinner(startingI) {
         let initialValue = ticInstance.occupiedSquares[startingI];
-        if (initialValue === 'empty' || !colIsMatching(startingI, initialValue)) {
-            return 'none'
-        } else {
-            return initialValue;
-        }
+        return initialValue !== 'empty' && colIsMatching(startingI, initialValue);
 
         function colIsMatching(startingI, initialValue) {
             for (let i = 1; i < 3; i++) {
