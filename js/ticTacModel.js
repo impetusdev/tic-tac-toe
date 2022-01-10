@@ -4,6 +4,7 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
     this.occupiedSquares = ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'];
     this.xlength = 3;
     this.ylength = 3;
+    this.currentTurn = 1;
 
     this.updateSquare = function(type, x, y) { //FIXME: depending on the grid settings and the jquery associated might need to change the values added to i below
         console.assert(x < 4 && y < 4); //TODO: find out if this was working
@@ -11,6 +12,9 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
 
         i = (x - 1) + (y - 1) * this.xlength; // get the index based on the input x,y and the grid dimensions
         this.occupiedSquares[i] = type;
+    };
+    this.incrementTurn = function() {
+        this.currentTurn++;
     };
     //TODO: consider making a convert index to x,y values funciton. 
 }
