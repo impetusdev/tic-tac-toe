@@ -45,21 +45,20 @@ $(function() {
     function isWinner() {
         // ticInstance.occupiedSquares;
 
-        //check all three columns
-        let winner = 'false';
+        //check columns
         for (let i = 0; i < 3; i++) {
-            winner = isSliceMatching(i);
-            if (winner) { return winner }
+            if (colIsMatching(i)) { return true }
         }
 
-        // check all three rows
+        // check rows
 
-        // check all two diagonals
-        return winner; // winner is only false here. 
+        // check diagonals
+
+        return false; // winner is only false here. 
     }
 
     // if a the line has 3 of the same kind then return player name else 'none'
-    function isSliceMatching(startingI) {
+    function colIsMatching(startingI) {
         let initialValue = ticInstance.occupiedSquares[startingI];
         return initialValue !== 'empty' && colIsMatching(startingI, initialValue);
 
