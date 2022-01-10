@@ -1,0 +1,19 @@
+.grid-container {
+    width: 300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-item {
+    outline: 1px grey solid;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
