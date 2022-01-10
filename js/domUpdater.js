@@ -46,19 +46,19 @@ $(function() {
         // ticInstance.occupiedSquares;
 
         //check columns
-        let winner = 'false';
         for (let i = 0; i < 3; i++) {
-            winner = findWinner(i);
-            if (winner) { return winner }
+            if (colIsMatching(i)) { return true }
         }
-        return winner; // winner is only false here. 
 
         // check rows
+
         // check diagonals
+
+        return false; // winner is only false here. 
     }
 
     // if a the line has 3 of the same kind then return player name else 'none'
-    function findWinner(startingI) {
+    function colIsMatching(startingI) {
         let initialValue = ticInstance.occupiedSquares[startingI];
         return initialValue !== 'empty' && colIsMatching(startingI, initialValue);
 
