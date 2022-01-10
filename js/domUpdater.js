@@ -19,7 +19,11 @@ $(function() {
 
         //TODO: refactor this logic so that the turn determines the winner.
         isWinner = checkIsWinner();
-        console.log('true if winner:', isWinner);
+
+        if (isWinner) {
+            const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
+            alert(`player ${currentPlayer} wins!`);
+        }
     })
 
     // imprints the pattern 
@@ -38,12 +42,11 @@ $(function() {
         }
     }
 
-    //TODO: refactor this function so it only determines if someone has won.
     function checkIsWinner() {
         // ticInstance.occupiedSquares;
 
         //check columns
-        let winner = 'none';
+        let winner = 'false';
         for (let i = 0; i < 3; i++) {
             winner = findWinner(i);
             if (winner) { return winner }
