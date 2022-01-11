@@ -1,12 +1,12 @@
 $(function() {
     const $allGridSquares = $('.grid-item');
 
-    // assign the jquery data values to each grid square element
+    // assign the jquery Data values to each grid square element
     $allGridSquares.each(function(i) {
-        const { x, y } = getCoordinatesFromIndex(i);
+        // const { x, y } = getCoordinatesFromIndex(i);
 
-        $(this).data({ x: x, y: y, i: i });
-        // console.log('the text is:', $(this).text(), $(this).data());
+        // $(this).data({ x: x, y: y, i: i });
+        $(this).data({ i: i });
     });
 
     // setup click event for all grid squares. 
@@ -36,27 +36,38 @@ $(function() {
 
     // checks if col, row or diagonals are matching & not empty
     function isWinner() { //TODO: ASK LUKE HOW I SHOULD LAYOUT THESE FUNTIONS AS THEY ARE ONLY USED HERE. 
-        //check columns
-        for (let i = 0; i < 3; i++) {
-            if (isValidSliceMatch(i, 3)) { return true }
+        return isColMatching() || isRowMatching() || isDiagonalMatching();
+
+        function isColMatching() {
+            for (let i = 0; i < 3; i++) {
+                if (isValidSliceMatch(i, 3)) { return true }
+            }
+
+            return false;
         }
 
-        // check rows
-        for (let i = 0; i <= 6; i += 3) {
-            if (isValidSliceMatch(i, 1)) { return true }
-        }
-        // check diagonals
-        if (isValidSliceMatch(0, 4)) { return true };
-        if (isValidSliceMatch(2, 2)) { return true };
+        function isRowMatching() {
+            for (let i = 0; i <= 6; i += 3) {
+                if (isValidSliceMatch(i, 1)) { return true }
+            }
 
-        return false;
+            return false;
+        }
+
+        function isDiagonalMatching() {
+            if (isValidSliceMatch(0, 4)) { return true };
+            if (isValidSliceMatch(2, 2)) { return true };
+            return false;
+        }
     }
 
-    // determines if the line has 3 of the same kind 
+
+    // determines if the line has 3 of the same kind & not empty
     function isValidSliceMatch(startingI, increment) { // increment determines whether examining col, row or diagonal
         let initialValue = ticInstance.occupiedSquares[startingI];
         return (initialValue !== 'empty') && isSliceMatching(startingI, initialValue);
 
+        // by using the appropriate increment compare the specific line on the grid to see if matching. 
         function isSliceMatching(startingI, initialValue) {
             for (let i = 1; i < 3; i++) {
                 if (initialValue !== ticInstance.occupiedSquares[i * increment + startingI]) { return false };
@@ -65,15 +76,12 @@ $(function() {
         }
     }
 
-    function getCoordinatesFromIndex(i) {
-        i++;
-        let x = (i) % 3;
-        x = x === 0 ? 3 : x; //FIXME: make this logic a bit more straight forward.
-        let y = (i - x) / 3 + 1;
+    // function getCoordinatesFromIndex(i) {
+    //     i++; // the index from Data starts at 0, so 1 increment required. 
+    //     let x = (i) % 3;
+    //     x = x === 0 ? 3 : x; //FIXME: make this logic a bit more straight forward.
+    //     let y = (i - x) / 3 + 1;
 
-        return { x, y };
-    }
+    //     return { x, y };
+    // }
 })
-
-
-// TODO: implement a .data() method when generating elements of the tic-tac grid.
