@@ -18,9 +18,8 @@ $(function() {
         gridClick($(this));
 
         //TODO: refactor this logic so that the turn determines the winner.
-        isWinner = isWinner();
 
-        if (isWinner) {
+        if (isWinner()) {
             const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
             alert(`player ${currentPlayer} wins!`);
         }
@@ -47,24 +46,28 @@ $(function() {
 
         //check columns
         for (let i = 0; i < 3; i++) {
-            if (colIsMatching(i)) { return true }
+            if (isValidSliceMatch(i, 3)) { return true }
         }
 
         // check rows
-
+        for (let i = 0; i <= 6; i += 3) {
+            if (isValidSliceMatch(i, 1)) { return true }
+        }
         // check diagonals
+        if (isValidSliceMatch(0, 4)) { return true };
+        if (isValidSliceMatch(2, 2)) { return true };
 
         return false; // winner is only false here. 
     }
 
     // if a the line has 3 of the same kind then return player name else 'none'
-    function colIsMatching(startingI) {
+    function isValidSliceMatch(startingI, increment) { // increment determines whether examining col, row or diagonal
         let initialValue = ticInstance.occupiedSquares[startingI];
-        return initialValue !== 'empty' && colIsMatching(startingI, initialValue);
+        return (initialValue !== 'empty') && isSliceMatching(startingI, initialValue);
 
-        function colIsMatching(startingI, initialValue) {
+        function isSliceMatching(startingI, initialValue) {
             for (let i = 1; i < 3; i++) {
-                if (initialValue !== ticInstance.occupiedSquares[i * 3 + startingI]) { return false };
+                if (initialValue !== ticInstance.occupiedSquares[i * increment + startingI]) { return false };
             }
             return true
         }
