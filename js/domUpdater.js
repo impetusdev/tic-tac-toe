@@ -1,6 +1,6 @@
 $(function() {
     const $allGridSquares = $('.grid-item');
-
+    const $winner = $('#winner');
     // assign the jquery Data values to each grid square element
     $allGridSquares.each(function(i) {
         // const { x, y } = getCoordinatesFromIndex(i);
@@ -14,7 +14,8 @@ $(function() {
 
         if (isWinner()) {
             const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
-            alert(`player ${currentPlayer} wins!`);
+            // alert(`player ${currentPlayer} wins!`);
+            $winner.text(`Player ${currentPlayer} has won!`);
 
             $allGridSquares.unbind();
         } else if (ticInstance.currentTurn > 9) {
@@ -40,7 +41,7 @@ $(function() {
     }
 
     // checks if col, row or diagonals are matching & not empty
-    function isWinner() { //TODO: ASK LUKE HOW I SHOULD LAYOUT THESE FUNTIONS AS THEY ARE ONLY USED HERE. 
+    function isWinner() {
         return isColMatching() || isRowMatching() || isDiagonalMatching();
 
         function isColMatching() {
@@ -60,8 +61,9 @@ $(function() {
         }
 
         function isDiagonalMatching() {
-            if (isValidSliceMatch(0, 4)) { return true };
-            if (isValidSliceMatch(2, 2)) { return true };
+            if (isValidSliceMatch(0, 4) || isValidSliceMatch(2, 2)) {
+                return true
+            }
             return false;
         }
     }
