@@ -1,12 +1,8 @@
 $(function() {
-    // when clicking on the actual div, get the value of the grid section updating
-
     const $allGridSquares = $('.grid-item');
 
+    // assign the jquery data values to each grid square element
     $allGridSquares.each(function(i) {
-        // convert index 
-        //TODO: need to make a separate function
-
         const { x, y } = getCoordinatesFromIndex(i);
 
         $(this).data({ x: x, y: y, i: i });
@@ -16,8 +12,6 @@ $(function() {
     // setup click event for all grid squares. 
     $allGridSquares.on('click', function() {
         gridClick($(this));
-
-        //TODO: refactor this logic so that the turn determines the winner.
 
         if (isWinner()) {
             const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
@@ -31,19 +25,17 @@ $(function() {
         const symbol = ticInstance.currentTurn % 2 === 1 ? 'X' : 'O';
 
         if (ticInstance.occupiedSquares[i] === "empty") {
-            // console.log('you have clicked:', $thisElement.data('x'), $thisElement.data('y'));
-            $thisElement.text(symbol);
-            ticInstance.occupiedSquares[i] = symbol;
+            $thisElement.text(symbol); // Updates DOM 
+            ticInstance.occupiedSquares[i] = symbol; // Updates Model;
             ticInstance.incrementTurn();
 
         } else {
-            console.log('that square is occupied, please choose again');
+            alert('that square is occupied, please choose again');
         }
     }
 
-    function isWinner() {
-        // ticInstance.occupiedSquares;
-
+    // checks if col, row or diagonals are matching & not empty
+    function isWinner() { //TODO: ASK LUKE HOW I SHOULD LAYOUT THESE FUNTIONS AS THEY ARE ONLY USED HERE. 
         //check columns
         for (let i = 0; i < 3; i++) {
             if (isValidSliceMatch(i, 3)) { return true }
@@ -57,10 +49,10 @@ $(function() {
         if (isValidSliceMatch(0, 4)) { return true };
         if (isValidSliceMatch(2, 2)) { return true };
 
-        return false; // winner is only false here. 
+        return false;
     }
 
-    // if a the line has 3 of the same kind then return player name else 'none'
+    // determines if the line has 3 of the same kind 
     function isValidSliceMatch(startingI, increment) { // increment determines whether examining col, row or diagonal
         let initialValue = ticInstance.occupiedSquares[startingI];
         return (initialValue !== 'empty') && isSliceMatching(startingI, initialValue);
