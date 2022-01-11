@@ -1,21 +1,21 @@
 Technical Requirements
 Your app must:
 
-Render a game board in the browser
-Switch turns between X and O (or whichever markers you select); your game should prevent users from playing a turn into a square that is already occupied
-Visually display which side won if a player gets three in a row; or show a draw/"cat’s game" if neither wins
-Include separate HTML / CSS / JavaScript files
-Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
-Use Javascript with jQuery (or vanilla DOM methods if you really prefer) for DOM manipulation
-Deploy your game online, where the rest of the world can access it
-Use semantic markup for HTML and CSS (adhere to best practices)
+✔  Render a game board in the browser 
+✔  Switch turns between X and O (or whichever markers you select); your game should prevent users from playing a turn into a square that is already occupied 
+    Visually display which side won if a player gets three in a row; or show a draw/"cat’s game" if neither wins 
+✔  Include separate HTML / CSS / JavaScript files 
+✔  Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles 
+✔  Use Javascript with jQuery (or vanilla DOM methods if you really prefer) for DOM manipulation
+    Deploy your game online, where the rest of the world can access it
+    Use semantic markup for HTML and CSS (adhere to best practices)
 
 
 -----------------------------------------------
 Bonus
 These are for extra credit! Don't focus on these until you've hit the core requirements.
 
-Keep track of multiple game rounds with a win counter
+TRY    Keep track of multiple game rounds with a win counter
 
 Allow players to customize their tokens (X, O, name, picture, etc)
 
@@ -23,13 +23,13 @@ Get inventive with your styling, e.g. use hover effects or animations to spiff t
 
 Make your game layout responsive so it works on differently-sized screens by exploring CSS Media Queries, CSS variables, and CSS layout mechanisms like Flexbox or Grid
 
-Use LocalStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
+TRY    Use LocalStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
 
-Support custom board sizes: default is 3x3 but you could allow users to choose a larger board
+TRY    Support custom board sizes: default is 3x3 but you could allow users to choose a larger board
 
 Support networked multiplayer: https://www.firebase.com/ has a nice quickstart guide
 
-Create an AI opponent: teach Javascript to play an unbeatable game against you
+TRY    Create an AI opponent: teach Javascript to play an unbeatable game against you
 
 Start by implementing a few simple rules which can be easily checked and are always good moves, such as "always take the center square if it's available" - you can google these rules for yourself
 You can build in as many AI player rules as you like but you'll quickly end up with a longwinded list of if-else-if statements. To make a truly unbeatable AI opponent you'll need to look into implementing a recursive full-game-tree algorithm like MiniMax - for advanced/bold students only!
@@ -56,3 +56,4 @@ A checkIfWinner function needs to look at if any of the rows/columns/diagonals a
 if so declare winner. 
 
 DOMUPDATER
+
