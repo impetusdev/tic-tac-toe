@@ -23,11 +23,17 @@ $(function() {
 
             $allGridSquares.unbind();
         }
+
+        // TODO: implement the computer mode response here. 
+
     })
+
 
     // imprints the pattern 
     function gridClick($thisElement) {
         const i = $thisElement.data('i');
+        //TODO: Implement a mode where in you check what the current ticInstance.playingComp and then generate the computer playing from there.  
+
         const symbol = ticInstance.currentTurn % 2 === 1 ? 'X' : 'O';
 
         if (ticInstance.occupiedSquares[i] === "empty") {
@@ -42,29 +48,27 @@ $(function() {
 
     // checks if col, row or diagonals are matching & not empty
     function isWinner() {
-        return isColMatching() || isRowMatching() || isDiagonalMatching();
+        //generate an array of objects with first value startingI and second one increment. These represent the values isValidSliceMatch() takes. 
+        const indexIncrementPairs = createIndexPairs();;
 
-        function isColMatching() {
+        // col and row pairs
+        return !indexIncrementPairs.every(element => { // does this somehow always return false now?
+            return !isValidSliceMatch(element.index, element.increment);
+        }); // this should be returning false 
+
+        function createIndexPairs() {
+            const pairs = [];
+            // row & col pairs
             for (let i = 0; i < 3; i++) {
-                if (isValidSliceMatch(i, 3)) { return true }
+                pairs.push({ index: i, increment: 3 });
+                pairs.push({ index: i * 3, increment: 1 });
             }
 
-            return false;
-        }
+            // diagonal pairs
+            pairs.push({ index: 0, increment: 4 });
+            pairs.push({ index: 2, increment: 2 });
 
-        function isRowMatching() {
-            for (let i = 0; i <= 6; i += 3) {
-                if (isValidSliceMatch(i, 1)) { return true }
-            }
-
-            return false;
-        }
-
-        function isDiagonalMatching() {
-            if (isValidSliceMatch(0, 4) || isValidSliceMatch(2, 2)) {
-                return true
-            }
-            return false;
+            return pairs
         }
     }
 
@@ -81,6 +85,8 @@ $(function() {
             return true
         }
     }
+
+    // determining who's turn it is 
 
     // function getCoordinatesFromIndex(i) {
     //     i++; // the index from Data starts at 0, so 1 increment required. 

@@ -1,0 +1,1 @@
+// this is the script that has all jquery code for vsing computer

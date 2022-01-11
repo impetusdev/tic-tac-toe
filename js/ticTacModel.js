@@ -4,6 +4,7 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
     // this.xlength = 3;
     // this.ylength = 3;
     this.currentTurn = 1;
+    this.playingComp = false;
 
     // get the i based on the input x,y and the grid dimensions
     this.updateSquare = function(type, x, y) {
@@ -15,7 +16,10 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
     this.incrementTurn = function() {
         this.currentTurn++;
     };
-    //TODO: consider making a convert index to x,y values funciton. 
+    this.changeGameMode = function() {
+            this.playingComp = !this.playingComp;
+        }
+        //TODO: consider making a convert index to x,y values funciton. 
 }
 
 const ticInstance = new TicTacBoard();
