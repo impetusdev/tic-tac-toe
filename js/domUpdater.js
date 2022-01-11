@@ -4,7 +4,6 @@ $(function() {
     // assign the jquery Data values to each grid square element
     $allGridSquares.each(function(i) {
         // const { x, y } = getCoordinatesFromIndex(i);
-
         // $(this).data({ x: x, y: y, i: i });
         $(this).data({ i: i });
     });
@@ -16,6 +15,12 @@ $(function() {
         if (isWinner()) {
             const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
             alert(`player ${currentPlayer} wins!`);
+
+            $allGridSquares.unbind();
+        } else if (ticInstance.currentTurn > 9) {
+            alert('No one has won :(')
+
+            $allGridSquares.unbind();
         }
     })
 
@@ -61,7 +66,6 @@ $(function() {
         }
     }
 
-
     // determines if the line has 3 of the same kind & not empty
     function isValidSliceMatch(startingI, increment) { // increment determines whether examining col, row or diagonal
         let initialValue = ticInstance.occupiedSquares[startingI];
@@ -85,3 +89,5 @@ $(function() {
     //     return { x, y };
     // }
 })
+
+// TODO: setup a computer player.
