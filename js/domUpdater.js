@@ -4,8 +4,10 @@ $(function() {
 
     // assign the jquery Data values to each grid square element
     $allGridSquares.each(function(i) {
-        const { x, y } = convertTo2DCoord(i);
-        $(this).data({ x: x, y: y, i: i }); // these x y values can be used in occupiedSquares
+        let x = i % 3;
+        let y = (i - x) / 3;
+
+        $(this).data({ x: x, y: y }); // these x y values can be used in occupiedSquares
     });
 
     // setup click event for all grid squares. 
@@ -57,11 +59,4 @@ $(function() {
         }
         // TODO: implement the computer mode response here. 
     });
-
-    function convertTo2DCoord(i) {
-        let x = i % 3;
-        let y = (i - x) / 3;
-
-        return { x, y };
-    }
 });
