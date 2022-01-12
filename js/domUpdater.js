@@ -109,3 +109,7 @@ $(function() {
     }
     runGame();
 });
+
+function checkOccupied(x, y) {
+    return ticInstance.occupiedSquares[y][x] === "empty";
+}
