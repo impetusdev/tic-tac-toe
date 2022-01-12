@@ -8,7 +8,7 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
     // this.xlength = 3;
     // this.ylength = 3;
     this.currentTurn = 1;
-    this.playingComp = false;
+    this.playingComp = true;
 
     // get the i based on the input x,y and the grid dimensions
     this.updateSquare = function(type, x, y) {
