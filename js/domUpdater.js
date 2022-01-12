@@ -3,7 +3,7 @@ $(function() {
     $('#reset').on('click', function() {
         ticInstance = new TicTacBoard(); //working
         // clear all values
-        $('.grid-item').text(' '); //FIXME: not working. 
+        $('.grid-item').text(' ');
         $('.grid-item').unbind();
         $('#winner').text('');
         // clear all on click handles
@@ -51,11 +51,12 @@ $(function() {
                     $allGridSquares.unbind();
                 }
 
+                // test if any row/col/diagonal that the clicked element lies on, is a match. 
                 function isWinner() {
                     const slices = [];
-                    slices.push( // get all appropriate slices. 
-                        ticInstance.occupiedSquares[y], // row  //FIXME: this is not counting the win if it is a row or column when player two
-                        ticInstance.occupiedSquares.map(row => row[x]), // col
+                    slices.push(
+                        ticInstance.occupiedSquares[y], // row
+                        ticInstance.occupiedSquares.map(row => row[x]), // col //TODO: consider putting in the if statement checking if the coords match the diagonal. 
                         ticInstance.occupiedSquares.map((row, i) => row[i]), // diag starting top left
                         ticInstance.occupiedSquares.map((row, i) => row[2 - i]), // diag starting top right
                     );
@@ -107,5 +108,4 @@ $(function() {
         });
     }
     runGame();
-
 });
