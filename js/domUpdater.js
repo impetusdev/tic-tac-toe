@@ -1,12 +1,24 @@
 $(function() {
+    // bind reset
+    $('#reset').on('click', function() {
+        ticInstance = new TicTacBoard(); //working
+        // clear all values
+        $('.grid-item').text(' '); //FIXME: not working. 
+        $('.grid-item').unbind();
+        $('#winner').text('');
+        // clear all on click handles
+        console.log('reset game');
+        runGame();
+    })
+
     function runGame() {
         const $allGridSquares = $('.grid-item');
         const $winner = $('#winner');
 
         // assign the jquery Data values to each grid square element
         $allGridSquares.each(function(i) {
-            let x = i % 3;
-            let y = (i - x) / 3;
+            const x = i % 3;
+            const y = (i - x) / 3;
 
             $(this).data({ x: x, y: y }); // these x y values can be used in occupiedSquares
         });
@@ -16,17 +28,13 @@ $(function() {
             const $square = $(this);
             let x = $square.data('x');
             let y = $square.data('y');
-            gridClick(); //FIXME: when the incorrect button is clicked then the computer goes, this is not right. 
+            gridClick();
             checkWinner();
 
-            // if no winner, computer plays a move. 
-            // Initially computer will always be player two. 
+            //computer player 2 starts
             if (ticInstance.playingComp && ticInstance.currentTurn % 2 === 0) {
                 computerClick();
-                checkWinner(); // this is not returning with the appropriate winner update when the bottom row is selected. 
-                // console.log(ticInstance.occupiedSquares);
-                //FIXME: didn't register the second player winning when all the buttons were clicked on the bottom.
-                //FIXME: upon player 1 incorrect input the winner was then declared.  
+                checkWinner();
             }
 
             function checkWinner() {
@@ -54,7 +62,6 @@ $(function() {
                     console.log('slices are: ', slices);
 
                     return !slices.every(slice => { //return true if one slice is matching, else return false 
-                        // debugger;
                         console.log('slice', slice);
                         const firstEl = slice[0];
                         return firstEl === 'empty' || !slice.every(square => square === firstEl); // this should result with true
@@ -101,13 +108,4 @@ $(function() {
     }
     runGame();
 
-    $('#reset').on('click', function() {
-        ticInstance = new TicTacBoard(); //working
-        // clear all values
-        debugger;
-        $('#grid-item').text(' '); //FIXME: not working. 
-        $('#grid-item').unbind;
-        // clear all on click handles
-        runGame();
-    })
 });
