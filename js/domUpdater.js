@@ -40,28 +40,21 @@ $(function() {
         }
 
         function isWinner() {
-            // check all the slices related to that one, 
-            // check the row with the given y value
+            const slices = [];
+            slices.push( // get all appropriate slices. 
+                ticInstance.occupiedSquares[y], // row 
+                ticInstance.occupiedSquares.map(row => row[x]), // col
+                ticInstance.occupiedSquares.map((row, i) => row[i]), // diag starting top left
+                ticInstance.occupiedSquares.map((row, i) => row[2 - i]), // diag starting top right
+            );
 
-            //get all appropriate slices. 
-            const currentRow = ticInstance.occupiedSquares[y]; //TODO: check if this needs the return statement
-            const currentCol = ticInstance.occupiedSquares.map(row => row[x]);
-            const currentDiag1 = ticInstance.occupiedSquares.map((row, i) => row[i]);
-            const currentDiag2 = ticInstance.occupiedSquares.map((row, i) => row[2 - i]);
-
-            console.log(currentRow);
-            console.log(currentCol);
-            console.log(currentDiag1);
-            console.log(currentDiag2);
-
-            // check the row with the given x value
-            // check the col with the given x value
-            // check the diag with the given y value. 
-
-            return false; //TODO: DELETE ME
+            return !slices.every(slice => { //return true if one slice is matching, else return false 
+                // debugger;
+                const firstEl = slice[0];
+                return firstEl === 'empty' || !slice.every(square => square === firstEl); // this should result with true
+            }); // the use of .every here is so that the loop will break when returning false
         }
         // TODO: implement the computer mode response here. 
-
     });
 
 
