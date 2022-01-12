@@ -1,6 +1,7 @@
 $(function() {
     const $allGridSquares = $('.grid-item');
     const $winner = $('#winner');
+
     // assign the jquery Data values to each grid square element
     $allGridSquares.each(function(i) {
         const { x, y } = convertTo2DCoord(i);
@@ -57,53 +58,6 @@ $(function() {
         // TODO: implement the computer mode response here. 
     });
 
-
-    // imprints the pattern 
-
-
-    // checks if col, row or diagonals are matching & not empty
-    // function isWinner() {
-    //     //generate an array of objects with first value startingI and second one increment. These represent the values isValidSliceMatch() takes. 
-    //     const indexIncrementPairs = createIndexPairs();;
-
-
-
-    //     // col and row pairs
-    //     return !indexIncrementPairs.every(element => { // does this somehow always return false now?
-    //         return !isValidSliceMatch(element.index, element.increment);
-    //     }); // this should be returning false 
-
-    //     function createIndexPairs() {
-    //         const pairs = [];
-    //         // row & col pairs
-    //         for (let i = 0; i < 3; i++) {
-    //             pairs.push({ index: i, increment: 3 });
-    //             pairs.push({ index: i * 3, increment: 1 });
-    //         }
-
-    //         // diagonal pairs
-    //         pairs.push({ index: 0, increment: 4 });
-    //         pairs.push({ index: 2, increment: 2 });
-
-    //         return pairs
-    //     }
-    // }
-
-    // determines if the line has 3 of the same kind & not empty
-    function isValidSliceMatch(startingI, increment) { // increment determines whether examining col, row or diagonal
-
-        let initialValue = ticInstance.occupiedSquares[startingI];
-        return (initialValue !== 'empty') && isSliceMatching(startingI, initialValue);
-
-        // by using the appropriate increment compare the specific line on the grid to see if matching. 
-        function isSliceMatching(startingI, initialValue) {
-            for (let i = 1; i < 3; i++) {
-                if (initialValue !== ticInstance.occupiedSquares[i * increment + startingI]) { return false };
-            }
-            return true
-        }
-    }
-
     function convertTo2DCoord(i) {
         let x = i % 3;
         let y = (i - x) / 3;
@@ -111,5 +65,3 @@ $(function() {
         return { x, y };
     }
 });
-
-// TODO: setup a computer player.
