@@ -5,8 +5,6 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
         ['empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty']
     ];
-    // this.xlength = 3;
-    // this.ylength = 3;
     this.currentTurn = 1;
     this.playingComp = true;
 
@@ -20,10 +18,9 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
     this.incrementTurn = function() {
         this.currentTurn++;
     };
-    this.changeGameMode = function() {
-            this.playingComp = !this.playingComp;
-        }
-        //TODO: consider making a convert index to x,y values funciton. 
+    this.changeGameMode = function() { //TODO: bind this function later. 
+        this.playingComp = !this.playingComp;
+    };
 }
 
-const ticInstance = new TicTacBoard();
+let ticInstance = new TicTacBoard();
