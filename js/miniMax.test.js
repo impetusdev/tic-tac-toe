@@ -28,5 +28,5 @@ const board3 = [
 ];
 
 test('check if find best move can select the best move amongst 3 empty slots', () => {
-    expect(miniMax.findBestMove(board3)).toBe({ x: 2, y: 2 });
+    expect(miniMax.findBestMove(board3)).toStrictEqual({ x: 2, y: 1 });
 });
