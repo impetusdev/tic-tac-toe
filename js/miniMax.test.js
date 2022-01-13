@@ -21,12 +21,53 @@ const board = [
 //     expect(miniMax.isWinner(0, 0, board2)).toBe(true);
 // });
 
-const board3 = [
-    ['X', 'O', 'X'],
-    ['X', 'X', 'empty'],
-    ['O', 'O', 'empty']
+// const board3 = [
+//     ['X', 'O', 'X'],
+//     ['X', 'X', 'empty'],
+//     ['O', 'O', 'empty']
+// ];
+
+// test('check if minimax Algorimthm selects right move #3', () => {
+//     expect(miniMax.findBestMove(board3, 7)).toStrictEqual({ x: 2, y: 2 });
+// });
+
+// const board4 = [
+//     ['X', 'O', 'X'],
+//     ['X', 'O', 'empty'],
+//     ['O', 'empty', 'X']
+// ];
+
+// test('check if minimax Algorimthm selects right move #4', () => {
+//     expect(miniMax.findBestMove(board4, 7)).toStrictEqual({ x: 1, y: 2 });
+// });
+
+
+// const board5 = [
+//     ['X', 'empty', 'X'],
+//     ['empty', 'O', 'O'],
+//     ['O', 'X', 'X']
+// ];
+
+// test('check if minimax Algorimthm selects right move #5', () => {
+//     expect(miniMax.findBestMove(board5, 7)).toStrictEqual({ x: 0, y: 1 });
+// });
+
+// const board6 = [
+//     ['X', 'empty', 'O'],
+//     ['X', 'empty', 'O'],
+//     ['O', 'X', 'X']
+// ];
+
+// test('check if minimax Algorimthm selects right move #6', () => {
+//     expect(miniMax.findBestMove(board6, 7)).toStrictEqual({ x: 1, y: 1 });
+// });
+
+const board7 = [
+    ['X', 'empty', 'O'],
+    ['X', 'empty', 'empty'],
+    ['O', 'empty', 'X']
 ];
 
-test('check if find best move can select the best move amongst 3 empty slots', () => {
-    expect(miniMax.findBestMove(board3)).toStrictEqual({ x: 2, y: 1 });
+test('check if minimax Algorimthm selects right move #7', () => {
+    expect(miniMax.findBestMove(board7, 5)).toStrictEqual({ x: 1, y: 1 });
 });

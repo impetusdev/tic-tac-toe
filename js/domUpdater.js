@@ -68,7 +68,6 @@ $(function() {
 
                     $allGridSquares.unbind();
                 }
-
             }
 
             // click a random spot for player 2
@@ -93,7 +92,6 @@ $(function() {
                     }
                 }
             }
-
         });
     }
     runGame();

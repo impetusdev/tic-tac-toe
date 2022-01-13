@@ -1,5 +1,5 @@
 // This file is to implement the minimax algorithm 
-const { expect } = require("@jest/globals");
+// const { expect } = require("@jest/globals");
 /*
 have a branch algo that produces the values of a branch tree, 
 then for the computers turn traverse this tree. and sum the possible actions.   
@@ -10,30 +10,23 @@ then for the computers turn traverse this tree. and sum the possible actions.
 
 //TODO: refactor the { x: x, y: y, sum } object to be a constructor.
 
-//EVALUATE THE BOARD VAL
-// IF WINNER RETURN THE BOARD VAL
-// ELSE FIND NEXT EMPTY SQUARE
-// PLAY IN EMPTY SQUARE
-// PERFORM MINIMAX WITH NEW BOARD STATE & DEPTH + 1
-
-
 // 
-function isNotOccupied(x, y) {
+function isNotOccupied(x, y, board) {
     return board[y][x] === "empty";
 }
 
-let currentTurn = 7; //TODO: fix this value you are using it to get all the other values but this is causing the printing of the wrong symbol for player 2
+//TODO: fix this value you are using it to get all the other values but this is causing the printing of the wrong symbol for player 2
 
-function miniMax(x, y, board, depth, isMax) {
+function miniMax(x, y, board, depth, isMax, turnEnding) {
     if (isWinner(x, y, board)) {
         // determine who the winner is and supply points
-        const playerNum = currentTurn % 2;
+        const playerNum = turnEnding % 2;
         if (playerNum === 1) {
             return -10;
         } else {
             return +10;
         }
-    } else if (currentTurn > 9) {
+    } else if (turnEnding > 8) {
         return 0;
     }
 
@@ -43,15 +36,15 @@ function miniMax(x, y, board, depth, isMax) {
         //travere all cells
         for (let y = 0; y < 3; y++) {
             for (let x = 0; x < 3; x++) {
-                if (isNotOccupied(x, y)) {
-                    board[y][x] = currentTurn % 2 === 1 ? 'X' : 'O';
-                    currentTurn++;
-                    best = Math.max(best, miniMax(x, y, board, depth + 1, !isMax)); //TODO: figure out why we need to flip between
+                if (isNotOccupied(x, y, board)) {
+                    turnEnding++;
+                    board[y][x] = 'X';
+                    best = Math.max(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding)); //TODO: figure out why we need to flip between
                     // I think the isMax value flips because the player switches so they are each trying to do the optimal move.
-                    currentTurn--;
+                    turnEnding--;
                     board[y][x] = 'empty';
-                };
-                //TODO: generate a occupiedSquares for each of the layers, that gets copied, then added to 
+                }
+                //TODO: generate a occupiedSquares for each off the layers, that gets copied, then added to 
             }
         }
         return best;
@@ -61,11 +54,12 @@ function miniMax(x, y, board, depth, isMax) {
         //travere all cells
         for (let x = 0; x < 3; x++) {
             for (let y = 0; y < 3; y++) {
-                if (isNotOccupied(x, y)) {
-                    board[y][x] = currentTurn % 2 === 1 ? 'X' : 'O';
-                    currentTurn++;
-                    best = Math.min(best, miniMax(x, y, board, depth + 1, !isMax)); //TODO: figure out why we need to flip between
-                    currentTurn--;
+                if (isNotOccupied(x, y, board)) {
+                    turnEnding++;
+                    board[y][x] = 'O';
+                    best = Math.min(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding));
+                    turnEnding--;
+                    console.log(board);
                     board[y][x] = 'empty';
                 };
                 //TODO: generate a occupiedSquares for each of the layers, that gets copied, then added to 
@@ -76,35 +70,34 @@ function miniMax(x, y, board, depth, isMax) {
 }
 
 // implement the high level function that evaluates all unselected squares, finds their best value
-function findBestMove(board) {
-    const bestMove = { x: -1, y: -1 }
-    let bestVal = -1000;
-
+function findBestMove(board, turnEnding) {
+    let bestMove = { x: -1, y: -1 };
+    let bestVal = -1000; //FIXME: why is this reseting the value everytime. 
 
     // travrse all current empty squares and evaluate their miniMax score. 
     for (let y = 0; y < 3; y++) {
         for (let x = 0; x < 3; x++) {
-            if (board[x][y] === 'empty') {
-                board[x][y] = currentTurn % 2 === 1 ? 'X' : 'O';
-                currentTurn++;
+            if (board[y][x] === 'empty') {
+                turnEnding++;
+                board[y][x] = 'O';
 
-                let moveVal = miniMax(x, y, board, 0, false); //TODO: DOUBLE cHECK THAT FALSE IS THE CORRECT INITIAL VAL
+                let moveVal = miniMax(x, y, board, 0, true, turnEnding); //TODO: DOUBLE CHECK THAT FALSE IS THE CORRECT INITIAL VAL
 
-                currentTurn--;
-                board[x][y] = 'empty';
+                turnEnding--;
+                board[y][x] = 'empty';
 
                 if (moveVal > bestVal) {
                     bestVal = moveVal;
-                    bestMove.x = y;
-                    bestMove.y = x;
+                    bestMove.x = x;
+                    bestMove.y = y;
                 }
             }
         }
     }
 
+    console.log('the best move is:', bestMove);
     return bestMove; // returns the coords of best move. 
 }
-// FIXME: keep this function in here just for testing
 // x and y are the coords of last move. 
 function isWinner(x, y, board) {
     let slices = [];
@@ -116,17 +109,15 @@ function isWinner(x, y, board) {
     );
 
     return !slices.every(slice => { //return true if one slice is matching, else return false 
-        console.log('slice', slice);
         const firstEl = slice[0];
-        return firstEl === 'empty' || !slice.every(square => square === firstEl); // this should result with true
+        return firstEl === 'empty' || !slice.every(square => square === firstEl); // this should result with true //TODO: CHANGE THIS TO AN &&
     }); // the use of .every here is so that the loop will break when returning false
 }
 
 // for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 
 // at each node down the tree evaluate if there is a winner, actually you should only evaluate winner when currentTurn > 5. it will save on the bulk of the computation.
 
-module.exports = {
-    findNextMoves: findNextMoves,
-    isWinner: isWinner,
-    findBestMove: findBestMove
-};
+// module.exports = {
+//     isWinner: isWinner,
+//     findBestMove: findBestMove
+// };
