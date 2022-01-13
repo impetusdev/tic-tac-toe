@@ -9,35 +9,12 @@ then for the computers turn traverse this tree. and sum the possible actions.
 
 
 //TODO: refactor the { x: x, y: y, sum } object to be a constructor.
-const board = [
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty']
-];
 
-// const boardClone = [
-//     ['empty', 'empty', 'empty'],
-//     ['empty', 'empty', 'empty'],
-//     ['empty', 'empty', 'empty']
-// ].map(el => el); // clones the empty board
-
-
-function findNextMoves(board, depth, isMax) {
-    // const emptySpots = [];
-
-    // for (let x = 0; x < 3; x++) {
-    //     for (let y = 0; y < 3; y++) {
-    //         if (checkOccupied(x, y)) { emptySpots.push({ x: x, y: y }) };
-    //         //TODO: generate a occupiedSquares for each of the layers, that gets copied, then added to 
-    //     }
-    // }
-
-    //EVALUATE THE BOARD VAL
-    // IF WINNER RETURN THE BOARD VAL
-    // ELSE FIND NEXT EMPTY SQUARE
-    // PLAY IN EMPTY SQUARE
-    // PERFORM MINIMAX WITH NEW BOARD STATE & DEPTH + 1
-}
+//EVALUATE THE BOARD VAL
+// IF WINNER RETURN THE BOARD VAL
+// ELSE FIND NEXT EMPTY SQUARE
+// PLAY IN EMPTY SQUARE
+// PERFORM MINIMAX WITH NEW BOARD STATE & DEPTH + 1
 
 
 // 
