@@ -42,25 +42,25 @@ const board = [
 // });
 
 
-// const board5 = [
-//     ['X', 'empty', 'X'],
-//     ['empty', 'O', 'O'],
-//     ['O', 'X', 'X']
-// ];
+const board5 = [
+    ['X', 'empty', 'X'],
+    ['empty', 'O', 'O'],
+    ['O', 'X', 'X']
+];
 
-// test('check if minimax Algorimthm selects right move #5', () => {
-//     expect(miniMax.findBestMove(board5, 7)).toStrictEqual({ x: 0, y: 1 });
-// });
+test('check if minimax Algorimthm selects right move #5', () => {
+    expect(miniMax.findBestMove(board5, 7)).toStrictEqual({ x: 0, y: 1 });
+});
 
-// const board6 = [
-//     ['X', 'empty', 'O'],
-//     ['X', 'empty', 'O'],
-//     ['O', 'X', 'X']
-// ];
+const board6 = [
+    ['X', 'empty', 'O'],
+    ['X', 'empty', 'O'],
+    ['O', 'X', 'X']
+];
 
-// test('check if minimax Algorimthm selects right move #6', () => {
-//     expect(miniMax.findBestMove(board6, 7)).toStrictEqual({ x: 1, y: 1 });
-// });
+test('check if minimax Algorimthm selects right move #6', () => {
+    expect(miniMax.findBestMove(board6, 7)).toStrictEqual({ x: 1, y: 1 });
+});
 
 const board7 = [
     ['X', 'empty', 'O'],

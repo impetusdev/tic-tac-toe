@@ -24,3 +24,5 @@ function TicTacBoard() { //TODO: figure out the first principles best method of 
 }
 
 let ticInstance = new TicTacBoard();
+
+//TODO: doesn't recognise the top row as a win

@@ -1,5 +1,3 @@
-runGame();
-
 $(function() {
     // bind reset
     $('#reset').on('click', function() {
@@ -13,6 +11,8 @@ $(function() {
         runGame();
     });
 
+    runGame();
+
     function runGame() {
         const $allGridSquares = $('.grid-item');
         const $winner = $('#winner');
@@ -24,6 +24,7 @@ $(function() {
 
             $(this).data({ x: x, y: y }); // these x y values can be used in occupiedSquares
         });
+
 
         // setup click event for all grid squares. 
         $allGridSquares.on('click', function() {
@@ -58,7 +59,7 @@ $(function() {
 
             // click a random spot for player 2
             function computerClick() {
-                let { x, y } = findBestMove(ticInstance.occupiedSquares, ticInstance.currentTurn);
+                let { x, y } = findBestMove(ticInstance.occupiedSquares, ticInstance.currentTurn - 1);
 
                 board[y][x] = 'O'
                 ticInstance.incrementTurn();
@@ -70,6 +71,21 @@ $(function() {
                 $current.text('O');
             }
         });
+
+        function checkWinner(x, y, board) {
+            if (isWinner(x, y, board)) {
+                const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
+                $winner.text(`Player ${currentPlayer} has won!`);
+                ticInstance.playingComp = false;
+
+                $allGridSquares.unbind();
+            } else if (ticInstance.currentTurn > 9) {
+                ticInstance.playingComp = false;
+                $winner.text(`No one has won :()`);
+
+                $allGridSquares.unbind();
+            }
+        }
     }
 });
 
@@ -79,23 +95,9 @@ function checkOccupied(x, y) {
     return ticInstance.occupiedSquares[y][x] === "empty";
 }
 
-function checkWinner(x, y, board) {
-    if (isWinner()) {
-        const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
-        $winner.text(`Player ${currentPlayer} has won!`);
-        ticInstance.playingComp = false;
-
-        $allGridSquares.unbind();
-    } else if (ticInstance.currentTurn > 9) {
-        ticInstance.playingComp = false;
-        $winner.text(`No one has won :()`);
-
-        $allGridSquares.unbind();
-    }
-}
-
 // test if any row/col/diagonal that the clicked element lies on, is a match. 
 function isWinner(x, y, board) {
+    debugger;
     let slices = [];
     slices.push(
         board[y], // row
