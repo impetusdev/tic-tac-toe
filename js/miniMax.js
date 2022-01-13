@@ -15,52 +15,13 @@ const board = [
     ['empty', 'empty', 'empty']
 ];
 
-<<<<<<< HEAD
-// const boardClone = [
-//     ['empty', 'empty', 'empty'],
-//     ['empty', 'empty', 'empty'],
-//     ['empty', 'empty', 'empty']
-// ].map(el => el); // clones the empty board
-=======
 // 
 function isNotOccupied(x, y, board) {
     return board[y][x] === "empty";
-}
->>>>>>> refactoringCheckWinnerForMiniMax
+} //TODO: remove this and change names later. 
 
 //TODO: fix this value you are using it to get all the other values but this is causing the printing of the wrong symbol for player 2
 
-<<<<<<< HEAD
-function findNextMoves(board, depth, isMax) {
-    // const emptySpots = [];
-
-    // for (let x = 0; x < 3; x++) {
-    //     for (let y = 0; y < 3; y++) {
-    //         if (checkOccupied(x, y)) { emptySpots.push({ x: x, y: y }) };
-    //         //TODO: generate a occupiedSquares for each of the layers, that gets copied, then added to 
-    //     }
-    // }
-
-    //EVALUATE THE BOARD VAL
-    // IF WINNER RETURN THE BOARD VAL
-    // ELSE FIND NEXT EMPTY SQUARE
-    // PLAY IN EMPTY SQUARE
-    // PERFORM MINIMAX WITH NEW BOARD STATE & DEPTH + 1
-}
-
-
-// 
-function checkOccupied(x, y) {
-    return board[y][x] === "empty";
-}
-module.exports = findNextMoves;
-
-function miniMax(board, depth, isMaximisingPlayer) {
-
-}
-
-// TODO: CONVERT THE FIND WINNER FUNCTION
-=======
 function miniMax(x, y, board, depth, isMax, turnEnding) {
     if (isWinner(x, y, board)) {
         // determine who the winner is and supply points
@@ -142,36 +103,11 @@ function findBestMove(board, turnEnding) {
     console.log('the best move is:', bestMove);
     return bestMove; // returns the coords of best move. 
 }
-// x and y are the coords of last move. 
-function isWinner(x, y, board) {
-    let slices = [];
-    slices.push(
-        board[y], // row
-        board.map(row => row[x]), // col //TODO: consider putting in the if statement checking if the coords match the diagonal. 
-        board.map((row, i) => row[i]), // diag starting top left
-        board.map((row, i) => row[2 - i]), // diag starting top right
-    );
-
-    return !slices.every(slice => { //return true if one slice is matching, else return false 
-        const firstEl = slice[0];
-        return firstEl === 'empty' || !slice.every(square => square === firstEl); // this should result with true //TODO: CHANGE THIS TO AN &&
-    }); // the use of .every here is so that the loop will break when returning false
-}
->>>>>>> refactoringCheckWinnerForMiniMax
 
 // for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 
 // at each node down the tree evaluate if there is a winner, actually you should only evaluate winner when currentTurn > 5. it will save on the bulk of the computation.
 
-<<<<<<< HEAD
-//
-
-/*
-do a check for victory
-
-*/
-=======
 // module.exports = {
 //     isWinner: isWinner,
 //     findBestMove: findBestMove
 // };
->>>>>>> refactoringCheckWinnerForMiniMax
