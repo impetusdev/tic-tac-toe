@@ -5,7 +5,7 @@ $(function() {
         // clear all values
         $('.grid-item').text(' ');
         $('.grid-item').unbind();
-        $('#winner').text('');
+        $('#winner').text(' ');
         // clear all on click handles
         console.log('reset game');
         runGame();

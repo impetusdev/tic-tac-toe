@@ -1,5 +1,5 @@
 const { expect } = require('@jest/globals');
-const { isWinner, miniMax } = require('./miniMax.js');
+const { isWinner, miniMax } = require('../js/miniMax.js');
 
 const board1 = [
     ['empty', 'empty', 'empty'],
