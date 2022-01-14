@@ -25,7 +25,6 @@ $(function() {
             $(this).data({ x: x, y: y }); // these x y values can be used in occupiedSquares
         });
 
-
         // setup click event for all grid squares. 
         $allGridSquares.on('click', function() {
             const $square = $(this);
@@ -71,7 +70,6 @@ $(function() {
                 ticInstance.incrementTurn();
 
                 const $current = $allGridSquares.filter(function() {
-                    // console.log('the this is:', $(this));
                     return $(this).data('x') === x && $(this).data('y') === y;
                 });
                 $current.text('O');
@@ -80,6 +78,7 @@ $(function() {
             }
         });
 
+        // check if the last move with x, y coordinates is a winning move. 
         function checkWinner(x, y, board) {
             if (isWinner(x, y, board)) {
                 const currentPlayer = ticInstance.currentTurn % 2 === 0 ? 1 : 2;
@@ -97,6 +96,7 @@ $(function() {
     }
 });
 
+// export function only if testing. 
 function checkOccupied(x, y) {
     return ticInstance.occupiedSquares[y][x] === "empty";
 }

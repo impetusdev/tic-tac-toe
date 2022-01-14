@@ -4,9 +4,8 @@ have a branch algo that produces the values of a branch tree,
 then for the computers turn traverse this tree. and sum the possible actions.   
 */
 
-
 function isNotOccupied(x, y, board) {
-    return board[y][x] === "empty";
+    return board[y][x] === 'empty';
 } //TODO: remove this and change names later. 
 
 function miniMax(x, y, board, depth, isMax, turnEnding) {
@@ -34,6 +33,7 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
                     best = Math.max(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding));
                     // I think the isMax value flips because the player switches so they are each trying to do the optimal move.
                     turnEnding--;
+                    console.log(board);
                     board[y][x] = 'empty';
                 }
                 //TODO: generate a occupiedSquares for each off the layers, that gets copied, then added to 
@@ -49,7 +49,9 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
                 if (isNotOccupied(x, y, board)) {
                     turnEnding++;
                     board[y][x] = 'O';
+
                     best = Math.min(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding));
+
                     turnEnding--;
                     console.log(board);
                     board[y][x] = 'empty';
@@ -103,14 +105,13 @@ function isWinner(x, y, board) {
         board.map((row, i) => row[2 - i]), // diag starting top right
     );
 
-    return !slices.every(slice => { //return true if one slice is matching, else return false 
+    return slices.some(slice => { //return true if one slice is matching, else return false 
         const firstEl = slice[0];
-        return firstEl === 'empty' || !slice.every(square => square === firstEl);
+        return firstEl !== 'empty' && slice.every(square => square === firstEl);
     }); // the use of .every here is so that the loop will break when returning false
 }
 
-//TODO: try out .some() vs .every();
-
+// export function only if testing. 
 if (typeof module !== 'undefined') {
     exports.isWinner = isWinner;
     exports.findBestMove = findBestMove;
