@@ -1,17 +1,10 @@
 // This file is to implement the minimax algorithm 
-// const { expect } = require("@jest/globals");
 /*
 have a branch algo that produces the values of a branch tree, 
 then for the computers turn traverse this tree. and sum the possible actions.   
 */
 
-const board = [
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty']
-];
 
-// 
 function isNotOccupied(x, y, board) {
     return board[y][x] === "empty";
 } //TODO: remove this and change names later. 
@@ -116,7 +109,25 @@ function findBestMove(board, turnEnding) {
 // }
 
 
-// module.exports = {
-//     isWinner: isWinner,
-//     findBestMove: findBestMove
-// };
+// test if any row/col/diagonal that the clicked element lies on, is a match. 
+function isWinner(x, y, board) {
+    let slices = [];
+    slices.push(
+        board[y], // row
+        board.map(row => row[x]), // col //TODO: consider putting in the if statement checking if the coords match the diagonal. 
+        board.map((row, i) => row[i]), // diag starting top left
+        board.map((row, i) => row[2 - i]), // diag starting top right
+    );
+
+    return !slices.every(slice => { //return true if one slice is matching, else return false 
+        const firstEl = slice[0];
+        return firstEl === 'empty' || !slice.every(square => square === firstEl);
+    }); // the use of .every here is so that the loop will break when returning false
+}
+
+//TODO: try out .some() vs .every();
+
+if (typeof module !== 'undefined') {
+    exports.isWinner = isWinner;
+    exports.miniMax = miniMax;
+}

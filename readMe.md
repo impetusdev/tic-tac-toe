@@ -7,7 +7,7 @@ Your app must:
 ✔  Include separate HTML / CSS / JavaScript files 
 ✔  Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles 
 ✔  Use Javascript with jQuery (or vanilla DOM methods if you really prefer) for DOM manipulation
-    Deploy your game online, where the rest of the world can access it
+✔  Deploy your game online, where the rest of the world can access it
 ✔  Use semantic markup for HTML and CSS (adhere to best practices)
 
 
@@ -36,7 +36,6 @@ You can build in as many AI player rules as you like but you'll quickly end up w
 Start again by implementing a totally different game: Try Checkers, or Battleships.... or Chess (if you're feeling very brave)
 
 Make a Vue.js version of your game, instead of jQuery, and compare the two...
-
 
 -----------------------------------------------
 
