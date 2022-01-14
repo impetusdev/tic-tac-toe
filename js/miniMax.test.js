@@ -1,5 +1,5 @@
 const { expect } = require('@jest/globals');
-const { isWinner, miniMax } = require('./miniMax.js');
+const { isWinner, findBestMove } = require('./miniMax.js');
 
 // test('is Winner returns false on empty board', () => {
 //     expect(miniMax.isWinner(0, 0, board)).toBe(false);
@@ -22,7 +22,7 @@ const { isWinner, miniMax } = require('./miniMax.js');
 // ];
 
 // test('check if minimax Algorimthm selects right move #3', () => {
-//     expect(miniMax.findBestMove(board3, 7)).toStrictEqual({ x: 2, y: 2 });
+//     expect(findBestMove(board3, 7)).toStrictEqual({ x: 2, y: 2 });
 // });
 
 // const board4 = [
@@ -32,7 +32,7 @@ const { isWinner, miniMax } = require('./miniMax.js');
 // ];
 
 // test('check if minimax Algorimthm selects right move #4', () => {
-//     expect(miniMax.findBestMove(board4, 7)).toStrictEqual({ x: 1, y: 2 });
+//     expect(findBestMove(board4, 7)).toStrictEqual({ x: 1, y: 2 });
 // });
 
 
@@ -43,7 +43,7 @@ const { isWinner, miniMax } = require('./miniMax.js');
 // ];
 
 // test('check if minimax Algorimthm selects right move #5', () => {
-//     expect(miniMax.findBestMove(board5, 7)).toStrictEqual({ x: 0, y: 1 });
+//     expect(findBestMove(board5, 7)).toStrictEqual({ x: 0, y: 1 });
 // });
 
 // const board6 = [
@@ -53,7 +53,7 @@ const { isWinner, miniMax } = require('./miniMax.js');
 // ];
 
 // test('check if minimax Algorimthm selects right move #6', () => {
-//     expect(miniMax.findBestMove(board6, 7)).toStrictEqual({ x: 1, y: 1 });
+//     expect(findBestMove(board6, 7)).toStrictEqual({ x: 1, y: 1 });
 // });
 
 // const board7 = [
@@ -63,7 +63,7 @@ const { isWinner, miniMax } = require('./miniMax.js');
 // ];
 
 // test('check if minimax Algorimthm selects right move #7', () => {
-//     expect(miniMax.findBestMove(board7, 5)).toStrictEqual({ x: 1, y: 1 });
+//     expect(findBestMove(board7, 5)).toStrictEqual({ x: 1, y: 1 });
 // });
 
 const board8 = [
@@ -73,7 +73,5 @@ const board8 = [
 ];
 
 test('check if minimax Algorimthm selects right move #8', () => {
-    expect(miniMax.findBestMove(board8, 1)).toStrictEqual({ x: 1, y: 1 });
+    expect(findBestMove(board8, 1)).toStrictEqual({ x: 1, y: 1 });
 });
-
-//TODO: use Xtest,

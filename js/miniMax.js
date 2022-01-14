@@ -93,22 +93,6 @@ function findBestMove(board, turnEnding) {
 // for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 
 // at each node down the tree evaluate if there is a winner, actually you should only evaluate winner when currentTurn > 5. it will save on the bulk of the computation.
 
-// function isWinner(x, y, board) {
-//     let slices = [];
-//     slices.push(
-//         board[y], // row
-//         board.map(row => row[x]), // col //TODO: consider putting in the if statement checking if the coords match the diagonal. 
-//         board.map((row, i) => row[i]), // diag starting top left
-//         board.map((row, i) => row[2 - i]), // diag starting top right
-//     );
-
-//     return !slices.every(slice => { //return true if one slice is matching, else return false 
-//         const firstEl = slice[0];
-//         return firstEl === 'empty' || !slice.every(square => square === firstEl);
-//     }); // the use of .every here is so that the loop will break when returning false
-// }
-
-
 // test if any row/col/diagonal that the clicked element lies on, is a match. 
 function isWinner(x, y, board) {
     let slices = [];
@@ -129,5 +113,5 @@ function isWinner(x, y, board) {
 
 if (typeof module !== 'undefined') {
     exports.isWinner = isWinner;
-    exports.miniMax = miniMax;
+    exports.findBestMove = findBestMove;
 }
