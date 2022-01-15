@@ -8,6 +8,37 @@ function isNotOccupied(x, y, board) {
     return board[y][x] === 'empty';
 } //TODO: remove this and change names later. 
 
+
+// implement the high level function that evaluates all unselected squares, finds their best value
+function findBestMove(board, turnEnding) {
+    let bestMove = { x: -1, y: -1 };
+    let bestVal = -1000;
+
+    // travrse all current empty squares and evaluate their miniMax score. 
+    for (let y = 0; y < 3; y++) {
+        for (let x = 0; x < 3; x++) {
+            if (board[y][x] === 'empty') {
+                turnEnding++;
+                board[y][x] = 'O';
+
+                let moveVal = miniMax(x, y, board, 0, true, turnEnding); //TODO: DOUBLE CHECK THAT FALSE IS THE CORRECT INITIAL VAL
+
+                turnEnding--;
+                board[y][x] = 'empty';
+
+                if (moveVal > bestVal) {
+                    bestVal = moveVal;
+                    bestMove.x = x;
+                    bestMove.y = y;
+                }
+            }
+        }
+    }
+
+    console.log('the best move is:', bestMove);
+    return bestMove; // returns the coords of best move. 
+}
+
 function miniMax(x, y, board, depth, isMax, turnEnding) {
     if (isWinner(x, y, board)) {
         // determine who the winner is and supply points
@@ -60,36 +91,6 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
         }
         return best;
     }
-}
-
-// implement the high level function that evaluates all unselected squares, finds their best value
-function findBestMove(board, turnEnding) {
-    let bestMove = { x: -1, y: -1 };
-    let bestVal = -1000;
-
-    // travrse all current empty squares and evaluate their miniMax score. 
-    for (let y = 0; y < 3; y++) {
-        for (let x = 0; x < 3; x++) {
-            if (board[y][x] === 'empty') {
-                turnEnding++;
-                board[y][x] = 'O';
-
-                let moveVal = miniMax(x, y, board, 0, true, turnEnding); //TODO: DOUBLE CHECK THAT FALSE IS THE CORRECT INITIAL VAL
-
-                turnEnding--;
-                board[y][x] = 'empty';
-
-                if (moveVal > bestVal) {
-                    bestVal = moveVal;
-                    bestMove.x = x;
-                    bestMove.y = y;
-                }
-            }
-        }
-    }
-
-    console.log('the best move is:', bestMove);
-    return bestMove; // returns the coords of best move. 
 }
 
 // for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 

@@ -5,7 +5,7 @@ $(function() {
         // clear all values
         $('.grid-item').text(' ');
         $('.grid-item').unbind();
-        $('#winner').text(' ');
+        $('#winner').text("LAURENCE'S TIC TAC TOE GAME");
         // clear all on click handles
         console.log('reset game');
         runGame();
@@ -13,6 +13,7 @@ $(function() {
 
     runGame();
 
+    //
     function runGame() {
         const $allGridSquares = $('.grid-item');
         const $winner = $('#winner');
@@ -38,13 +39,6 @@ $(function() {
 
             board = ticInstance.occupiedSquares;
 
-            //computer play
-            if (ticInstance.playingComp && ticInstance.currentTurn % 2 === 0) {
-                let { x, y } = computerClick();
-                board = ticInstance.occupiedSquares;
-
-                checkWinner(x, y, board); // FIXME: this checkwinner is not registering properly
-            }
 
             function gridClick() {
                 //TODO: Implement a mode where in you check what the current ticInstance.playingComp and then generate the computer playing from there.  
@@ -58,6 +52,14 @@ $(function() {
                 } else {
                     alert('that square is occupied, please choose again');
                 }
+            }
+
+            //computer play
+            if (ticInstance.playingComp && ticInstance.currentTurn % 2 === 0) {
+                let { x, y } = computerClick();
+                board = ticInstance.occupiedSquares;
+
+                checkWinner(x, y, board); // FIXME: this checkwinner is not registering properly
             }
 
             // click a random spot for player 2
@@ -88,9 +90,9 @@ $(function() {
                 $allGridSquares.unbind();
             } else if (ticInstance.currentTurn > 9) {
                 ticInstance.playingComp = false;
-                $winner.text(`No one has won :()`);
+                $winner.text('No one has won :(');
 
-                $allGridSquares.unbind();
+                $allGridSquares.unbind(); //TODO: change to OFF;
             }
         }
     }

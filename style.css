@@ -7,7 +7,7 @@
 }
 
 .grid-item {
-    outline: 1px grey solid;
+    outline: 3px grey solid;
     text-align: center;
     width: 30px;
     height: 30px;
@@ -16,6 +16,8 @@
     margin: auto;
     margin-top: 5px;
     margin-bottom: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 .container {
@@ -30,10 +32,16 @@
     margin: auto;
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 #winner {
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.grid-item:hover {
+    background-color: rgb(199, 199, 199) !important;
 }
