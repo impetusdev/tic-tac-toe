@@ -100,5 +100,5 @@ $(function() {
 
 // export function only if testing. 
 function checkOccupied(x, y) {
-    return ticInstance.occupiedSquares[y][x] === "empty";
+    return ticInstance.occupiedSquares[y][x] === '_';
 }

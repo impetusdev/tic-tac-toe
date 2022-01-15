@@ -1,9 +1,9 @@
 // make the model of the tic-tac values
 function TicTacBoard() { //TODO: figure out the first principles best method of holding state of the occupriedSquares
     this.occupiedSquares = [
-        ['empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty'],
-        ['empty', 'empty', 'empty']
+        ['_', '_', '_'],
+        ['_', '_', '_'],
+        ['_', '_', '_']
     ];
     this.currentTurn = 1;
     this.playingComp = true;

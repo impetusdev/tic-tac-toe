@@ -3,8 +3,8 @@ const { isWinner, findBestMove } = require('../js/miniMax.js');
 
 const board3 = [
     ['X', 'O', 'X'],
-    ['X', 'X', 'empty'],
-    ['O', 'O', 'empty']
+    ['X', 'X', '_'],
+    ['O', 'O', '_']
 ];
 
 test('check if minimax Algorimthm selects right move #3', () => {
@@ -13,8 +13,8 @@ test('check if minimax Algorimthm selects right move #3', () => {
 
 const board4 = [
     ['X', 'O', 'X'],
-    ['X', 'O', 'empty'],
-    ['O', 'empty', 'X']
+    ['X', 'O', '_'],
+    ['O', '_', 'X']
 ];
 
 test('check if minimax Algorimthm selects right move #4', () => {
@@ -22,8 +22,8 @@ test('check if minimax Algorimthm selects right move #4', () => {
 });
 
 const board5 = [
-    ['X', 'empty', 'X'],
-    ['empty', 'O', 'O'],
+    ['X', '_', 'X'],
+    ['_', 'O', 'O'],
     ['O', 'X', 'X']
 ];
 
@@ -32,8 +32,8 @@ test('check if minimax Algorimthm selects right move #5', () => {
 });
 
 const board6 = [
-    ['X', 'empty', 'O'],
-    ['X', 'empty', 'O'],
+    ['X', '_', 'O'],
+    ['X', '_', 'O'],
     ['O', 'X', 'X']
 ];
 
@@ -42,9 +42,9 @@ test('check if minimax Algorimthm selects right move #6', () => {
 });
 
 const board7 = [
-    ['X', 'empty', 'O'],
-    ['X', 'empty', 'empty'],
-    ['O', 'empty', 'X']
+    ['X', '_', 'O'],
+    ['X', '_', '_'],
+    ['O', '_', 'X']
 ];
 
 test('check if minimax Algorimthm selects right move #7', () => {
@@ -52,9 +52,9 @@ test('check if minimax Algorimthm selects right move #7', () => {
 });
 
 const board8 = [
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'X'],
-    ['empty', 'empty', 'empty']
+    ['_', '_', '_'],
+    ['_', '_', 'X'],
+    ['_', '_', '_']
 ];
 
 test('check if minimax Algorimthm selects right move #8', () => {

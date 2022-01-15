@@ -2,9 +2,9 @@ const { expect } = require('@jest/globals');
 const { isWinner, miniMax } = require('../js/miniMax.js');
 
 const board1 = [
-    ['empty', 'empty', 'empty'],
-    ['empty', 'empty', 'X'],
-    ['empty', 'empty', 'empty']
+    ['_', '_', '_'],
+    ['_', '_', 'X'],
+    ['_', '_', '_']
 ];
 
 test('testing isWinner when board not winning', () => {
@@ -12,9 +12,9 @@ test('testing isWinner when board not winning', () => {
 })
 
 const board2 = [
-    ['empty', 'empty', 'X'],
-    ['empty', 'empty', 'X'],
-    ['empty', 'empty', 'X']
+    ['_', '_', 'X'],
+    ['_', '_', 'X'],
+    ['_', '_', 'X']
 ];
 
 test('testing isWinner when last col is matching', () => {
@@ -22,8 +22,8 @@ test('testing isWinner when last col is matching', () => {
 })
 
 const board3 = [
-    ['empty', 'empty', 'O'],
-    ['empty', 'empty', 'O'],
+    ['_', '_', 'O'],
+    ['_', '_', 'O'],
     ['X', 'X', 'X']
 ];
 
@@ -32,9 +32,9 @@ test('testing isWinner when last col is matching', () => {
 })
 
 const board4 = [
-    ['X', 'empty', 'empty'],
-    ['empty', 'X', 'empty'],
-    ['empty', 'empty', 'X']
+    ['X', '_', '_'],
+    ['_', 'X', '_'],
+    ['_', '_', 'X']
 ];
 
 test('testing isWinner top left diagonal is matching', () => {
@@ -42,9 +42,9 @@ test('testing isWinner top left diagonal is matching', () => {
 })
 
 const board5 = [
-    ['X', 'empty', 'empty'],
-    ['empty', 'empty', 'X'],
-    ['empty', 'empty', 'X']
+    ['X', '_', '_'],
+    ['_', '_', 'X'],
+    ['_', '_', 'X']
 ];
 
 test('testing isWinner when no matches', () => {
@@ -52,9 +52,9 @@ test('testing isWinner when no matches', () => {
 })
 
 const board6 = [
-    ['empty', 'empty', 'X'],
-    ['empty', 'X', 'empty'],
-    ['X', 'empty', 'X']
+    ['_', '_', 'X'],
+    ['_', 'X', '_'],
+    ['X', '_', 'X']
 ];
 
 test('testing isWinner top right diagonal is matching', () => {
