@@ -1,9 +1,7 @@
 // This file is to implement the minimax algorithm
 // MiniMax: multiple branch search algorithm that seeks to maximise winning instances nd avoid losing moves. 
+// https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/?ref=lbp
 
-function isNotOccupied(x, y, board) {
-    return board[y][x] === '_';
-} //TODO: remove this and change names later. 
 
 
 // implement the high level function that evaluates all unselected squares, finds their best value
@@ -52,7 +50,7 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
     // computer player moves
     if (isMax) {
         best = -100;
-        //travere all cells
+        //traverse all cells
         for (let y = 0; y < 3; y++) {
             for (let x = 0; x < 3; x++) {
                 if (isNotOccupied(x, y, board)) { // refactor these loops into a single function 'findNextEmpty', 
@@ -74,6 +72,7 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
         best = 100;
 
         //travere all cells
+        // TODO: need to refactor this code so that it does the code 
         for (let x = 0; x < 3; x++) {
             for (let y = 0; y < 3; y++) {
                 if (isNotOccupied(x, y, board)) {
@@ -92,8 +91,19 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
     }
 }
 
-function findNextEmpty(x, y, board) {
+function isNotOccupied(x, y, board) {
+    return board[y][x] === '_';
+}
 
+
+function findNextNotOccupied(x, y, board) {
+    for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+            if (board[y][x] === '_') {
+                return { x, y };
+            }
+        }
+    }
 }
 // TODO: for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 
 // at each node down the tree evaluate if there is a winner, actually you should only evaluate winner when currentTurn > 5. it will save on the bulk of the computation.
