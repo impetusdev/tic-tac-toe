@@ -2,8 +2,6 @@
 // MiniMax: multiple branch search algorithm that seeks to maximise winning instances nd avoid losing moves. 
 // https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/?ref=lbp
 
-
-
 // implement the high level function that evaluates all unselected squares, finds their best value
 function findBestMove(board, turnEnding) {
     let bestMove = { x: -1, y: -1 };
@@ -16,7 +14,7 @@ function findBestMove(board, turnEnding) {
                 turnEnding++;
                 board[y][x] = 'O';
 
-                let moveVal = miniMax(x, y, board, 0, true, turnEnding); //TODO: DOUBLE CHECK THAT FALSE IS THE CORRECT INITIAL VAL
+                let moveVal = miniMax(x, y, board, 0, false, turnEnding); //TODO: DOUBLE CHECK THAT FALSE IS THE CORRECT INITIAL VAL
 
                 turnEnding--;
                 board[y][x] = '_';
@@ -43,9 +41,11 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
         } else {
             return +10;
         }
-    } else if (turnEnding > 8) {
+    } else if (turnEnding === 9) {
         return 0;
     }
+
+    // need to be retaining the value from best when you hit the end of the loop. 
 
     // computer player moves
     if (isMax) {
@@ -55,8 +55,9 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
             for (let x = 0; x < 3; x++) {
                 if (isNotOccupied(x, y, board)) { // refactor these loops into a single function 'findNextEmpty', 
                     turnEnding++;
-                    board[y][x] = 'X';
-                    best = Math.max(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding));
+
+                    board[y][x] = 'O';
+                    best = Math.max(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding)); // TODO: eventually get this max function to prioritise the minimum depth solutions. 
                     // I think the isMax value flips because the player switches so they are each trying to do the optimal move.
                     turnEnding--;
                     console.log(board);
@@ -77,9 +78,9 @@ function miniMax(x, y, board, depth, isMax, turnEnding) {
             for (let y = 0; y < 3; y++) {
                 if (isNotOccupied(x, y, board)) {
                     turnEnding++;
-                    board[y][x] = 'O';
+                    board[y][x] = 'X';
 
-                    best = Math.min(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding));
+                    best = Math.min(best, miniMax(x, y, board, depth + 1, !isMax, turnEnding)); //TODO: consider doing a min function for  all of the possible elements so that is compares all of them at once.
 
                     turnEnding--;
                     console.log(board);
@@ -96,15 +97,16 @@ function isNotOccupied(x, y, board) {
 }
 
 
-function findNextNotOccupied(x, y, board) {
-    for (let x = 0; x < 3; x++) {
-        for (let y = 0; y < 3; y++) {
-            if (board[y][x] === '_') {
-                return { x, y };
-            }
-        }
-    }
-}
+// function findNextNotOccupied(x, y, board) {
+//     for (let x = 0; x < 3; x++) {
+//         for (let y = 0; y < 3; y++) {
+//             if (board[y][x] === '_') {
+//                 return { x, y };
+//             }
+//         }
+//     }
+// }
+
 // TODO: for each of the choices immediately infront, evaluate the ways in which the game could go and then sum the win loss count accross these, 
 // at each node down the tree evaluate if there is a winner, actually you should only evaluate winner when currentTurn > 5. it will save on the bulk of the computation.
 // test if any row/col/diagonal that the clicked element lies on, is a match. 
